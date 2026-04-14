@@ -236,29 +236,27 @@ out=mclapply(1:nrow(setups), function(z)
   out
 },mc.cores=1)
 
-# ################################################################################################################
-# ####Tables
-# 
-# library(xtable)
-# 
-# load("normal_n0c:50_n:100_alpha.up:0.075_cf:0.692820323027551_cp:4_w.mix:0.3_OCdat.RData")
-# 
-# out_NoConflict=subset(out,out$Conflict==0)
-# tabOCs=out_NoConflict[,c('Freq.type.I','Freq.Power')]*100
-# rownames(tabOCs)=out_NoConflict$Decision
-# maxTIEcal=tapply(out[,c('Type.I.cal')], out$Decision, function(x) max(x)*100)[rownames(tabOCs)]
-# maxPowcal=tapply(out[,c('Power.cal')], out$Decision, function(x) max(x)*100)[rownames(tabOCs)]
-# tabOCs100=cbind(tabOCs,maxTIEcal-maxTIEcal['FD'],maxPowcal-maxPowcal['FD'])
-# 
-# load("normal_n0c:10_n:20_alpha.up:0.075_cf:1.54919333848297_cp:4_w.mix:0.3_OCdat.RData")
-# 
-# out_NoConflict20=subset(out,out$Conflict==0)
-# tabOCs=out_NoConflict20[,c('Freq.type.I','Freq.Power')]*100
-# rownames(tabOCs)=out_NoConflict$Decision
-# maxTIEcal=tapply(out[,c('Type.I.cal')], out$Decision, function(x) max(x)*100)[rownames(tabOCs)]
-# maxPowcal=tapply(out[,c('Power.cal')], out$Decision, function(x) max(x)*100)[rownames(tabOCs)]
-# tabOCs20=cbind(tabOCs,maxTIEcal-maxTIEcal['FD'],maxPowcal-maxPowcal['FD'])
-# 
-# xtable(cbind(tabOCs20, tabOCs100))
-# 
-# 
+################################################################################################################
+#Table 1
+
+library(xtable)
+
+load("~/results/normal_n0c:50_nc:100_nt:100_alpha.up:0.075_alpha.low:0.01_cp:4_ct:4_w.mix:0.3_OCdat.RData")
+
+out_NoConflict=subset(out,out$Conflict==0)
+tabOCs=out_NoConflict[,c('Freq.type.I','Freq.Power')]*100
+rownames(tabOCs)=out_NoConflict$Decision
+maxTIEcal=tapply(out[,c('Type.I.cal')], out$Decision, function(x) max(x)*100)[rownames(tabOCs)]
+maxPowcal=tapply(out[,c('Power.cal')], out$Decision, function(x) max(x)*100)[rownames(tabOCs)]
+tabOCs100=cbind(tabOCs,maxTIEcal-maxTIEcal['FD'],maxPowcal-maxPowcal['FD'])
+
+load("~/results/normal_n0c:10_nc:20_nt:20_alpha.up:0.075_alpha.low:0.01_cp:4_ct:4_w.mix:0.3_OCdat.RData")
+
+out_NoConflict20=subset(out,out$Conflict==0)
+tabOCs=out_NoConflict20[,c('Freq.type.I','Freq.Power')]*100
+rownames(tabOCs)=out_NoConflict$Decision
+maxTIEcal=tapply(out[,c('Type.I.cal')], out$Decision, function(x) max(x)*100)[rownames(tabOCs)]
+maxPowcal=tapply(out[,c('Power.cal')], out$Decision, function(x) max(x)*100)[rownames(tabOCs)]
+tabOCs20=cbind(tabOCs,maxTIEcal-maxTIEcal['FD'],maxPowcal-maxPowcal['FD'])
+
+xtable(rbind(tabOCs20, tabOCs100)) 
