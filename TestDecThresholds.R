@@ -332,8 +332,8 @@ kappa.plot.sensitivity= ggplot() + theme_light() +
 
 
 sens=
-  (kappa.plot.sensitivity + guides(col = guide_legend(nrow = 1, byrow = T))) | 
-  gamma.plot.sensitivity + guides(color = "none") +
+  ((kappa.plot.sensitivity + guides(col = guide_legend(nrow = 1, byrow = T))) | 
+  gamma.plot.sensitivity + guides(color = "none")) +
   plot_layout(guides = "collect") &
   theme(legend.position = "top")
 
